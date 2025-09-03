@@ -1,0 +1,21 @@
+{
+  "token": "YOUR_BOT_TOKEN_HERE",
+  "clientId": "YOUR_CLIENT_ID_HERE",
+  "guildId": "YOUR_GUILD_ID_HERE",
+  "bot": {
+    "name": "🎵STRAWHAT MUSIC",
+    "status": "🎶 Playing music 24/7",
+    "activity": "🎵 /play | /help",
+    "color": "#FF6B6B"
+  },
+  "music": {
+    "defaultVolume": 50,
+    "maxVolume": 100,
+    "leaveTimeout": 300000,
+    "searchResults": 5
+  },
+  "commands": {
+    "prefix": "!",
+    "slashCommands": true
+  }
+} 

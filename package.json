@@ -1,0 +1,29 @@
+{
+  "name": "strawhat-music",
+  "version": "1.0.0",
+  "description": "A custom Discord music bot with branding capabilities",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "author": "STRAWHAT",
+  "license": "MIT",
+  "dependencies": {
+    "@discordjs/opus": "^0.9.0",
+    "@discordjs/voice": "^0.16.1",
+    "@distube/spotify": "^1.6.1",
+    "@distube/yt-dlp": "^1.1.3",
+    "discord.js": "^14.14.1",
+    "distube": "^4.2.2",
+    "ffmpeg-static": "^5.2.0",
+    "libsodium-wrappers": "^0.7.13",
+    "ytdl-core": "^4.11.5"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}

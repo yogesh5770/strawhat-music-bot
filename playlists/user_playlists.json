@@ -1,0 +1,79 @@
+{
+  "857435828308672513": {
+    "yogesh": {
+      "name": "yogesh",
+      "songs": [
+        {
+          "name": "Guzarish - A.R. Rahman , Javed Ali (slowed + Reverbed) Leo",
+          "url": "https://soundcloud.com/devanshmishra/guzarish-ar-rahman-javed-ali-slowed-reverbed-leo",
+          "duration": 386.983,
+          "formattedDuration": "06:26",
+          "thumbnail": "https://i1.sndcdn.com/artworks-sLLxktNjUfSm3B0y-CviT3g-large.jpg",
+          "user": "yogesh075063"
+        }
+      ],
+      "totalDuration": 386.983,
+      "songCount": 1,
+      "createdAt": "2025-09-03T01:15:11.084Z",
+      "createdBy": "yogesh075063"
+    },
+    "abc": {
+      "name": "abc",
+      "songs": [
+        {
+          "name": "Mascara",
+          "url": "https://open.spotify.com/track/3HRaPAkrok0SwsmvtQAQ8U",
+          "duration": 296.25,
+          "formattedDuration": "04:56",
+          "thumbnail": "https://mosaic.scdn.co/640/ab67616d00001e0212546fea4b4c6634049c598fab67616d00001e022e795b370e1f0cc62de751e9ab67616d00001e02563f0075e1a2f5497652ea9eab67616d00001e0266ad9d4af93282eb3ad8c75e",
+          "user": "yogesh075063"
+        },
+        {
+          "name": "Sonapareeya",
+          "url": "https://open.spotify.com/track/5v7gCLVyLgpO5L6zdeXULd",
+          "duration": 249.293,
+          "formattedDuration": "04:09",
+          "thumbnail": "https://mosaic.scdn.co/640/ab67616d00001e0212546fea4b4c6634049c598fab67616d00001e022e795b370e1f0cc62de751e9ab67616d00001e02563f0075e1a2f5497652ea9eab67616d00001e0266ad9d4af93282eb3ad8c75e",
+          "user": "yogesh075063"
+        },
+        {
+          "name": "Ussumu Laresey",
+          "url": "https://open.spotify.com/track/2qolr6PKNLXvjp4JTtglSf",
+          "duration": 287.44,
+          "formattedDuration": "04:47",
+          "thumbnail": "https://mosaic.scdn.co/640/ab67616d00001e0212546fea4b4c6634049c598fab67616d00001e022e795b370e1f0cc62de751e9ab67616d00001e02563f0075e1a2f5497652ea9eab67616d00001e0266ad9d4af93282eb3ad8c75e",
+          "user": "yogesh075063"
+        },
+        {
+          "name": "Ale Ale (From \"Boys\")",
+          "url": "https://open.spotify.com/track/6xC11UOjR9cnvxvKLNXqxh",
+          "duration": 385.96,
+          "formattedDuration": "06:25",
+          "thumbnail": "https://mosaic.scdn.co/640/ab67616d00001e0212546fea4b4c6634049c598fab67616d00001e022e795b370e1f0cc62de751e9ab67616d00001e02563f0075e1a2f5497652ea9eab67616d00001e0266ad9d4af93282eb3ad8c75e",
+          "user": "yogesh075063"
+        },
+        {
+          "name": "Sithira Puthiri - From \"Think Indie\"",
+          "url": "https://open.spotify.com/track/1uQU9b93tlMlMoZ0h2bRgf",
+          "duration": 226.465,
+          "formattedDuration": "03:46",
+          "thumbnail": "https://mosaic.scdn.co/640/ab67616d00001e0212546fea4b4c6634049c598fab67616d00001e022e795b370e1f0cc62de751e9ab67616d00001e02563f0075e1a2f5497652ea9eab67616d00001e0266ad9d4af93282eb3ad8c75e",
+          "user": "yogesh075063"
+        },
+        {
+          "name": "Dheemthanakka Thillana",
+          "url": "https://open.spotify.com/track/03U54vL2BusGyivjzEIzmT",
+          "duration": 249.746,
+          "formattedDuration": "04:09",
+          "thumbnail": "https://mosaic.scdn.co/640/ab67616d00001e0212546fea4b4c6634049c598fab67616d00001e022e795b370e1f0cc62de751e9ab67616d00001e02563f0075e1a2f5497652ea9eab67616d00001e0266ad9d4af93282eb3ad8c75e",
+          "user": "yogesh075063"
+        }
+      ],
+      "totalDuration": 1695.154,
+      "songCount": 6,
+      "source": "URL",
+      "createdAt": "2025-09-03T01:18:52.467Z",
+      "createdBy": "yogesh075063"
+    }
+  }
+}
