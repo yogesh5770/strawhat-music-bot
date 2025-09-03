@@ -1,51 +1,58 @@
-const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
+﻿const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
-    .setName('queue')
-    .setDescription('Show the current music queue'),
-  
+    .setName("queue")
+    .setDescription("Show the current music queue"),
+
   async execute(interaction, client) {
-    const queue = client.distube.getQueue(interaction.guildId);
+    try {
+      const queue = client.musicQueues.get(interaction.guild.id);
+      
+      if (!queue) {
+        return interaction.reply({ 
+          content: " No music queue found!", 
+          ephemeral: true 
+        });
+      }
 
-    if (!queue) {
-      return interaction.reply({
-        content: '❌ There is nothing playing right now!',
-        ephemeral: true
+      // Get queue from client
+      const musicQueue = client.songQueues?.get(interaction.guild.id) || [];
+      
+      if (musicQueue.length === 0) {
+        return interaction.reply({ 
+          content: " The queue is empty!", 
+          ephemeral: true 
+        });
+      }
+
+      const embed = new EmbedBuilder()
+        .setColor(0x00BFFF)
+        .setTitle(" Music Queue")
+        .setDescription(`**${musicQueue.length}** songs in queue`)
+        .setTimestamp();
+
+      // Show first 10 songs
+      const songsToShow = musicQueue.slice(0, 10);
+      songsToShow.forEach((song, index) => {
+        embed.addFields({
+          name: `${index + 1}. ${song.title}`,
+          value: `Duration: ${song.durationRaw || "Unknown"}`,
+          inline: false
+        });
+      });
+
+      if (musicQueue.length > 10) {
+        embed.setFooter({ text: `And ${musicQueue.length - 10} more songs...` });
+      }
+
+      await interaction.reply({ embeds: [embed] });
+
+    } catch (error) {
+      console.error("Queue command error:", error);
+      await interaction.reply({ 
+        content: " An error occurred while showing the queue!" 
       });
     }
-
-    const embed = new EmbedBuilder()
-      .setColor(0x4ECDC4)
-      .setTitle('🎵 Music Queue')
-      .setDescription(`**Now Playing:** ${queue.songs[0].name}`)
-      .addFields(
-        {
-          name: 'Duration',
-          value: queue.songs[0].formattedDuration,
-          inline: true
-        },
-        {
-          name: 'Requested by',
-          value: queue.songs[0].user.tag,
-          inline: true
-        }
-      )
-      .setThumbnail(queue.songs[0].thumbnail)
-      .setTimestamp();
-
-    if (queue.songs.length > 1) {
-      const queueList = queue.songs.slice(1, 11).map((song, index) => {
-        return `${index + 1}. **${song.name}** - ${song.formattedDuration} (${song.user.tag})`;
-      }).join('\n');
-
-      embed.addFields({
-        name: `Up Next (${queue.songs.length - 1} songs)`,
-        value: queueList + (queue.songs.length > 11 ? '\n...and more!' : ''),
-        inline: false
-      });
-    }
-
-    await interaction.reply({ embeds: [embed] });
   },
-}; 
+};

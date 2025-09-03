@@ -1,55 +1,54 @@
-const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
+﻿const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
+const { AudioPlayerStatus } = require("@discordjs/voice");
 
 module.exports = {
   data: new SlashCommandBuilder()
-    .setName('pause')
-    .setDescription('Pause the currently playing song'),
-  
+    .setName("pause")
+    .setDescription("Pause the current music"),
+
   async execute(interaction, client) {
-    const queue = client.distube.getQueue(interaction.guildId);
     const voiceChannel = interaction.member.voice.channel;
 
     if (!voiceChannel) {
-      return interaction.reply({
-        content: '❌ You need to be in a voice channel to use this command!',
-        ephemeral: true
-      });
-    }
-
-    if (!queue) {
-      return interaction.reply({
-        content: '❌ There is nothing playing right now!',
-        ephemeral: true
-      });
-    }
-
-    if (queue.paused) {
-      return interaction.reply({
-        content: '⏸️ The music is already paused!',
-        ephemeral: true
+      return interaction.reply({ 
+        content: " You need to be in a voice channel to use this command!", 
+        ephemeral: true 
       });
     }
 
     try {
-      queue.pause();
+      const connection = client.musicQueues.get(interaction.guild.id);
       
-      const embed = new EmbedBuilder()
-        .setColor(0xFFA500)
-        .setTitle('⏸️ Music Paused')
-        .setDescription(`**${queue.songs[0].name}** has been paused`)
-        .setTimestamp();
+      if (!connection) {
+        return interaction.reply({ 
+          content: " No music is currently playing!", 
+          ephemeral: true 
+        });
+      }
 
-      await interaction.reply({ embeds: [embed] });
+      const player = connection.state.subscription?.player;
+      if (player && player.state.status === AudioPlayerStatus.Playing) {
+        player.pause();
+        
+        const embed = new EmbedBuilder()
+          .setColor(0xFFA500)
+          .setTitle(" Music Paused")
+          .setDescription("Music has been paused.")
+          .setTimestamp();
+
+        await interaction.reply({ embeds: [embed] });
+      } else {
+        await interaction.reply({ 
+          content: " No music is currently playing!", 
+          ephemeral: true 
+        });
+      }
+
     } catch (error) {
-      console.error('Pause command error:', error);
-      
-      const errorEmbed = new EmbedBuilder()
-        .setColor(0xFF6B6B)
-        .setTitle('❌ Error')
-        .setDescription('Failed to pause the music.')
-        .setTimestamp();
-
-      await interaction.reply({ embeds: [errorEmbed] });
+      console.error("Pause command error:", error);
+      await interaction.reply({ 
+        content: " An error occurred while pausing the music!" 
+      });
     }
   },
-}; 
+};
