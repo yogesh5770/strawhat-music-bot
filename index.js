@@ -1,4 +1,5 @@
-﻿const { Client, GatewayIntentBits, Collection, ActivityType } = require('discord.js');
+﻿// STRAWHAT MUSIC BOT - UPDATED VERSION
+const { Client, GatewayIntentBits, Collection, ActivityType } = require('discord.js');
 
 // Load configuration from environment variables
 const config = {
@@ -26,6 +27,8 @@ if (!config.clientId) {
   process.exit(1);
 }
 
+console.log(' Environment variables validated successfully!');
+
 // Create Discord client with necessary intents
 const client = new Client({
   intents: [
@@ -45,11 +48,15 @@ client.currentSong = new Map(); // Current playing song
 client.musicHistory = new Map(); // Music history
 client.qualitySettings = new Map(); // Quality settings
 
+console.log(' Client initialized successfully!');
+
 // Load command handler
 require('./handlers/commandHandler')(client);
 
 // Load event handler (now clean without DisTube)
 require('./handlers/eventHandler')(client);
+
+console.log(' Handlers loaded successfully!');
 
 // Bot ready event
 client.once('ready', () => {
@@ -97,6 +104,8 @@ const PORT = process.env.PORT || 3000;
 server.listen(PORT, () => {
   console.log(` Render health check server running on port ${PORT}`);
 });
+
+console.log(' Starting bot login...');
 
 // Login with bot token
 client.login(config.token);
