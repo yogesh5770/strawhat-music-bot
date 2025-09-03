@@ -1,8 +1,30 @@
 ﻿const { Client, GatewayIntentBits, Collection, ActivityType } = require('discord.js');
-const { DisTube } = require('distube');
-const { SpotifyPlugin } = require('@distube/spotify');
-const { YtDlpPlugin } = require('@distube/yt-dlp');
-const config = require('./config.json');
+
+// Load configuration from environment variables
+const config = {
+  token: process.env.DISCORD_BOT_TOKEN,
+  clientId: process.env.CLIENT_ID,
+  guildId: process.env.GUILD_ID,
+  bot: {
+    activity: ' STRAWHAT Music'
+  }
+};
+
+// Debug: Log environment variables (without exposing sensitive data)
+console.log(' Environment Check:');
+console.log('Token exists:', !!config.token);
+console.log('Client ID exists:', !!config.clientId);
+console.log('Guild ID exists:', !!config.guildId);
+
+if (!config.token) {
+  console.error(' DISCORD_BOT_TOKEN environment variable is missing!');
+  process.exit(1);
+}
+
+if (!config.clientId) {
+  console.error(' CLIENT_ID environment variable is missing!');
+  process.exit(1);
+}
 
 // Create Discord client with necessary intents
 const client = new Client({
@@ -13,30 +35,26 @@ const client = new Client({
   ],
 });
 
-// Create DisTube instance with plugins for v4
-client.distube = new DisTube(client, {
-  plugins: [
-    new SpotifyPlugin(), // Spotify first - official releases, best quality
-    new YtDlpPlugin({ update: true }), // YouTube - maximum availability (99%)
-  ],
-  // DisTube v4 options
-  leaveOnStop: false,
-  leaveOnFinish: false,
-  leaveOnEmpty: true,
-  emptyCooldown: 30000, // 30 seconds
-});
-
 // Command collection
 client.commands = new Collection();
 
-// Load commands and events
+// Music system
+client.musicQueues = new Map(); // Voice connections
+client.songQueues = new Map(); // Song queues
+client.currentSong = new Map(); // Current playing song
+client.musicHistory = new Map(); // Music history
+client.qualitySettings = new Map(); // Quality settings
+
+// Load command handler
 require('./handlers/commandHandler')(client);
+
+// Load event handler (now clean without DisTube)
 require('./handlers/eventHandler')(client);
 
 // Bot ready event
 client.once('ready', () => {
-  console.log(`🎵 ${client.user.tag} is ready!`);
-  console.log(`🎶 Bot is in ${client.guilds.cache.size} servers`);
+  console.log(` ${client.user.tag} is ready!`);
+  console.log(` Bot is in ${client.guilds.cache.size} servers`);
 
   // Set bot status and activity
   client.user.setPresence({
@@ -57,7 +75,7 @@ process.on('unhandledRejection', (error) => {
   console.error('Unhandled promise rejection:', error);
 });
 
-// Railway health check endpoint
+// Render health check endpoint
 const http = require('http');
 const server = http.createServer((req, res) => {
   if (req.url === '/health') {
@@ -77,8 +95,8 @@ const server = http.createServer((req, res) => {
 
 const PORT = process.env.PORT || 3000;
 server.listen(PORT, () => {
-  console.log(`🚂 Railway health check server running on port ${PORT}`);
+  console.log(` Render health check server running on port ${PORT}`);
 });
 
 // Login with bot token
-client.login(config.token); 
+client.login(config.token);
